@@ -1,0 +1,133 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="MP01.master.vb" Inherits="EasySapWeb.MP01" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <asp:ContentPlaceHolder runat="server" ID="script"></asp:ContentPlaceHolder>
+    <title>PORTAL WEB | RIMÓN S.A.</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="HandheldFriendly" content="True" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+
+    <link rel="shortcut icon" type="image/x-icon" href="icono_rimon.ico" />
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/TeamDashboardB4/assets/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="vendor/TeamDashboardB4/assets/dashboard.css" rel="stylesheet" />
+
+</head>
+
+<body>
+<form id="form2" runat="server">  
+<asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+<nav class="navbar navbar-light bg-light sticky-top flex-xl-nowrap p-0 shadow">
+  <a class="navbar-brand navbar-light bg-light col-xl-2 col-lg-3 col-md-3 mr-0 px-3 text-center h1 accordion accordion accordion" href="Inicio.aspx">Portal <sup>web</sup> | RIMÓN S.A.</a>
+  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <ul class="navbar nav float-sm-left">
+   
+    <li class="nav-item dropdown d-none d-sm-inline">
+        <a class="nav-link dropdown-toggle text-dark " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><asp:Label ID="NombreUsuario" runat="server" Text="Sin Ingresar"></asp:Label>
+            <i class="fas fa-user-circle fa-fw"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in">
+            
+            <!--<div class="dropdown-divider"></div>-->
+            <a class="dropdown-item text-dark" href="#" data-toggle="modal" data-target="#logoutModal">Cerrar Sesión</a>
+        </div>
+    </li>
+  </ul>
+</nav>
+<div class="container-fluid">
+  <div class="row">
+    <!--Sección para el menú-->
+    <nav id="sidebarMenu" class="col-xl-2 col-lg-3 col-md-3 d-xl-block d-md-block bg-primary sidebar collapse">
+        <div class="sidebar-sticky pt-3">
+            <ul class="nav flex-column">
+                <asp:UpdatePanel ID="UP0" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        <asp:Panel ID="PMENU" runat="server" Visible="false">
+                            <asp:Literal ID="L01" runat="server"></asp:Literal>
+                            <!-- Divider -->
+                            <hr class="sidebar-divider d-lg-none d-lx-block">
+                            <!-- Nav Item - Alerts -->
+                            <li class="nav-item dropdown d-lg-none d-lx-block">
+                                <a class="nav-link dropdown-toggle text-dark" href="#" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-bell fa-fw"></i>
+                                    <!-- Counter - Alerts -->   
+                                    <span class="badge badge-danger badge-counter">3+</span>
+                                </a>
+                                <!-- Dropdown - Alerts -->
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                    aria-labelledby="alertsDropdown">
+                                    <h6 class="dropdown-header">
+                                        Centro de Alertas
+                                    </h6>
+                                    <a class="dropdown-item text-center small text-gray-500" href="#">Ver Todas las Alertas</a>
+                                </div>
+                            </li>
+                            <!-- Sidebar Sesión -->
+                            <li class="nav-item dropdown d-lg-none d-lx-block">
+                                <a class="nav-link dropdown-toggle text-dark " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><asp:Label ID="Label1" runat="server" Text="Sin Ingresar"></asp:Label>
+                                    <i class="fas fa-user-circle fa-fw"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in">
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-id-card fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Perfil
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-dark" href="#" data-toggle="modal" data-target="#logoutModal">Cerrar Sesión</a>
+                                </div>
+                            </li>
+                        </asp:Panel>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </ul>
+        </div>
+    </nav>
+    <!--Fin de la Sección para el menú-->
+    <!--Sección del contenido-->
+     <main role="main" class="col-xl-10 col-lg-9 col-md-9 ml-sm-auto"> <%--col-md-9 ml-sm-auto col-lg-10--%>
+      <asp:HiddenField ID="HFCTY" runat="server" />
+        <asp:ContentPlaceHolder runat="server" ID="Contenido"></asp:ContentPlaceHolder>
+      <asp:LinkButton ID="BTNHLP" runat="server" Text="Ayuda" Style="display: none"></asp:LinkButton>
+    </main>
+    <!--in de la Sección del contenido-->
+  </div>
+</div>
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Listo para salir?</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">Seleccione "Cerrar sesión" a continuación si está listo para finalizar su sesión actual.</div>
+    <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+        <asp:LinkButton ID="BTNSALIR" runat="server" CssClass="btn btn-primary" Text=" Cerrar sesión " OnClientClick="w3_close()" ></asp:LinkButton> 
+    </div>
+    </div>
+</div>
+</div>
+<!-- Finish Logout Modal-->
+</form>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="vendor/jquery.slim.min.js"><\/script>')</script><script src="vendor/TeamDashboardB4/assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+<script src="vendor/TeamDashboardB4/assets/dashboard.js"></script>
+</body>
+</html>
